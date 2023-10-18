@@ -9,5 +9,18 @@ if __name__ == '__main__':
     clusterizer = ThreadingClusterizer(worker.readDataInFrame(("Creatinine_mean", "HCO3_mean")))
     clusterizer.clusterization(thread_count=2, clusterCount=4)
 
-    print(clusterizer.getClusterContent())
-    worker.writeInFile()
+
+
+    # print(clusterizer.getClusterContent())
+    data = {}
+    for i, cluster in enumerate(clusterizer.getClusterContent()):
+
+
+        for key in cluster[0].keys():
+            data[key+"-"+str(i)] = []
+        for item in cluster:
+            for key in item.keys():
+                data[key+"-"+str(i)].append(item)
+
+    print(data.keys())
+    worker.writeInFile(fileName="result", data=data)

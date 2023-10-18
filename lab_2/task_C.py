@@ -35,7 +35,7 @@ class BaseExcelWorker():
             self.new_table_data.at[0, i] = key
             for j in range(len(data[key])): self.new_table_data.at[j+1, i] = data[key][j]
             i += 1
-        print(self.new_table_data)
+        # print(self.new_table_data)
         self.new_table_data.to_excel(fileName+".xlsx", index=False)
 
 
@@ -69,7 +69,7 @@ class ThreadingClusterizer():
         self.distributeClusterContent()
         item_count = 0
         for cont in self.clustersContent: item_count += len(cont)
-        print(item_count)
+        # print(item_count)
 
         return self.clustersContent
 
