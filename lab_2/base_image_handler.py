@@ -1,5 +1,6 @@
 from PIL import Image
 import time, logging, threading
+import queue
 
 class BaseImageHandler():
     def __init__(self, imageName):
@@ -24,12 +25,3 @@ class BaseImageHandler():
 
     def saveResultImage(self, name="result"):
         self.resultImage.save(name + ".jpg", "JPEG")
-
-    def processImage(self, thread_numbers=1, vector=(0,0)):
-        thread_list = list()
-        for t_num in range(thread_numbers):
-            start, end = int(t_num * (self.width / thread_numbers)), int((1 + t_num) * (self.width / thread_numbers))
-            thread_list.append(
-                threading.Thread(target=self.threadProcess, args=(start, end, vector), name=f'thr-{str(t_num)}'))
-        for t in thread_list: t.start()
-        for t in thread_list: t.join()
