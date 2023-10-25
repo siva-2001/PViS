@@ -1,5 +1,5 @@
 from  imageProcessing import Task_A
-from filterImage_B import Task_B
+from Task_B import Task_B
 from task_C import Clusterizer, BaseExcelWorker, DannIndexCalculator
 from speedCheck import checkSpeedOfFunc
 import logging, threading, time
@@ -9,15 +9,23 @@ loggingPath = '/logs/'
 
 
 
+# if __name__ == '__main__':
+#     for name in ["image_1", "image_2", "image_3"]:
+#         task_a = Task_A(name+'.jpg')
+#         for i in range(2, 17, 2):
+#             checkSpeedOfFunc(task_a.processImage, thr_count=i)
+#             task_a.saveResultImage(name+"_result")
+
+
 if __name__ == '__main__':
-    for name in ["image_1", "image_2", "image_3"]:
-        task_a = Task_A(name+'.jpg')
-        for i in range(2, 17, 2):
-            checkSpeedOfFunc(task_a.processImage, thr_count=i)
-            task_a.saveResultImage(name+"_result")
+    for name in ["image_1"]:#, "image_2", "image_3"]:
+        task_b = Task_B(name+'.jpg')
+        # for i in range(2, 17, 2):
+        #     checkSpeedOfFunc(task_b.processImage, thr_count=i)
+        #     task_b.saveResultImage(name+"_result")
 
-
-
+        checkSpeedOfFunc(task_b.processImage, vector=(5, 12), thr_count=4)
+        task_b.saveResultImage(name + "_result")
 
 
 # if __name__ == '__main__':
